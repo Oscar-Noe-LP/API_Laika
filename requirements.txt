@@ -1,5 +1,5 @@
-fastapi
-tensorflow
-numpy
-Pillow
-uvicorn
+fastapi==0.115.5
+tensorflow==2.15.0
+numpy==1.26.4
+Pillow==9.5.0
+uvicorn==0.32.1
