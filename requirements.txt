@@ -6,3 +6,4 @@ uvicorn==0.32.1
 python-multipart==0.0.18
 librosa==0.10.2.post1
 pydub==0.25.1
+imageio[ffmpeg]
