@@ -22,27 +22,25 @@ AUDIO_CLASSES = ['Advertencia o miedo', 'Alerta o emoción', 'Relajación']
 
 # Función para manejar archivos temporales
 async def save_temp_file(file):
-    # Guardar el archivo temporalmente en su formato original
     temp = tempfile.NamedTemporaryFile(delete=False, suffix=f".{file.filename.split('.')[-1]}")
     temp.write(await file.read())
     temp.close()
     logger.info(f'Archivo guardado en: {temp.name}')
-    
-    # Si el archivo no es WAV, convertirlo
+
     if not file.filename.lower().endswith("wav"):
         wav_file_path = tempfile.NamedTemporaryFile(delete=False, suffix=".wav").name
-        convert_to_wav(temp.name, wav_file_path)  # Convertir el archivo a WAV
-        os.remove(temp.name)  # Eliminar el archivo original temporal
+        convert_to_wav(temp.name, wav_file_path)  
+        os.remove(temp.name)  
         logger.info(f"Archivo convertido a WAV y guardado en: {wav_file_path}")
-        return wav_file_path  # Devolver la ruta del archivo convertido a WAV
+        return wav_file_path  
     
-    return temp.name  # Si ya era WAV, devolver la ruta original
+    return temp.name  
 
 # Función para convertir audio a formato WAV
 def convert_to_wav(input_path, output_path):
     try:
         audio = AudioSegment.from_file(input_path)
-        audio = audio.set_channels(1).set_frame_rate(22050)  # Convertir a mono y ajustar la tasa de muestreo
+        audio = audio.set_channels(1).set_frame_rate(22050)  
         audio.export(output_path, format="wav")
         converted_audio = AudioSegment.from_wav(output_path)
         if converted_audio.channels != 1 or converted_audio.frame_rate != 22050:
