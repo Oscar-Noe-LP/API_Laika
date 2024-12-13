@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 app = FastAPI()
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
-IMAGE_CLASSES = ['No-perros', 'angry', 'happy', 'relaxed', 'sad']
+IMAGE_CLASSES = ['No-es-un-perro', 'Enojado', 'Feliz', 'Relajado', 'Triste']
 AUDIO_CLASSES = ['Advertencia o miedo', 'Alerta o emoción', 'Relajación']
 
 # Función para manejar archivos temporales
