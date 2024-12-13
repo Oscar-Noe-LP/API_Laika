@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 app = FastAPI()
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 
-IMAGE_CLASSES = ['angry', 'happy', 'relaxed', 'sad', 'No-perros']
+IMAGE_CLASSES = ['No-perros', 'angry', 'happy', 'relaxed', 'sad']
 AUDIO_CLASSES = ['Advertencia o miedo', 'Alerta o emoción', 'Relajación']
 
 # Función para manejar archivos temporales
@@ -54,7 +54,7 @@ def convert_to_wav(input_path, output_path):
 
 # Modelo de imágenes
 class ImageModelManager:
-    def __init__(self, model_path: str = "modelo.tflite"):
+    def __init__(self, model_path: str = "modeloo.tflite"):
         try:
             self.model = tf.lite.Interpreter(model_path=model_path)
             self.model.allocate_tensors()
